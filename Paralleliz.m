@@ -265,6 +265,30 @@ function RSP_hw = R_source_p_hw(n, hw, y_hw)
     RSP_hw = sqrt(RSP_SQR_hw);
 end
 
+clc;
+clear all;
+close all;
+fc=960;% frequency of transmission in MHz
+fc2=150;
+hb= 442.0 - 390.0;% effective height of transmitting base station antenna in meters
+hm=1.5;% effective receiving mobile device antenna height in meters
+hm1=(1.1*log10(fc)-0.7)*hm-(1.56*log10(fc)-0.8);%Open
+
+C=-2*(log10(fc/28))^2-5.4;
+C2=-4.78*(log10(fc))^2+18.33*log10(fc)-40.98;
+C3=0;
+d = (1:50:700);
+A=69.55+26.16*log10(fc)-13.82*log10(hb)-hm1;
+
+B=44.9-6.55*log10(hb);
+Plopen=A+B*log10(d)+C 
+
+plot(d,Plopen,'linewidth',2.5);
+title('Path-Loss for 700 metres ')
+xlabel('Distance')
+ylabel('Path-Loss in dB')
+grid on
+
 
 
 
